@@ -1,0 +1,7 @@
+# info
+/config/dev.js
+
+# dependencies
+/node_modules
+
+.env
