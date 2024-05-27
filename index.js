@@ -1,13 +1,16 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import UserModel from './model/UserModal.js';
+
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 dotenv.config();
 
 const PORT = process.env.PORT || 7000;
 const MONGOURL = process.env.MONGO_URI;
+
+app.use(express.json());
 
 mongoose
     .connect(MONGOURL)
@@ -20,9 +23,6 @@ mongoose
     .catch((err) => console.log(err));
 
 // user
-app.get('/getUsers', async (req, res) => {
-    const userData = await UserModel.find();
-    res.json(userData);
-});
+app.use('/user', userRoutes);
 
 // todo
